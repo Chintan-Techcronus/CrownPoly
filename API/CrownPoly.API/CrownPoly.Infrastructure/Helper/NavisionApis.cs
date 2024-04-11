@@ -16,7 +16,23 @@ namespace CrownPoly.API.Helper
         #region Get token
         public static async Task<string> getBearerAccessToken()
         {
-            return "";
+            string clientId = "0cff32a0-1778-41c9-881c-689d203784ad";
+            string secret = "i_68Q~WqRSnmuE049kvD3vEjjzcT7SZibbZrTb.g";
+            string url = "https://login.microsoftonline.com/c3c096f5-ee40-470a-b3da-eaf7010658e2/oauth2/v2.0/token";
+            HttpClient httpClient = new HttpClient();
+            var content = new StringContent("grant_type=client_credentials&scope=https://api.businesscentral.dynamics.com/.default&client_id="
+            + HttpUtility.UrlEncode(clientId) + "&client_secret=" + HttpUtility.UrlEncode(secret));
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/x-www-form-urlencoded");
+            var response = await httpClient.PostAsync(url, content);
+            if (response.IsSuccessStatusCode)
+            {
+                JObject result = JObject.Parse(await response.Content.ReadAsStringAsync());
+                return result["access_token"].ToString();
+            }
+            else
+            {
+                return "";
+            }
         }
         #endregion Get token
 
