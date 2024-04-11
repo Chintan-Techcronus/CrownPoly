@@ -1,0 +1,18 @@
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn button {
+  margin: 0 10px;
+}
+.header-title {
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 15px;
+}
+.mat-card-title {
+  font-size: 20px;
+}.text-muted {
+  color: #888383;
+} 

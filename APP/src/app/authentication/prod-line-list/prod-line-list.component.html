@@ -1,0 +1,35 @@
+<div class="bg-white">
+    <img src="assets/images/cp-logo1.png" width="150" alt="user" class="m-5 p-0">
+</div>
+<div class="prod-lines-container">
+    <mat-card class="prod-lines-card">
+        <mat-card-header>
+            <mat-card-title>Production Lines</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form>
+                <div class="container">
+                    <div *ngFor="let prodline of prodlines" class="m-r-20">
+                        <button mat-raised-button color="primary" class="prod-lines-btn"
+                            (click)="redirectToProdlineModule(prodline?.Name)">{{ prodline?.Name }}
+                        </button>
+                    </div>
+                        <!-- <div *ngFor="let prodline of prodlineDisplayNames | keyvalue" class="m-r-20">
+                            <button mat-raised-button color="primary" class="prod-lines-btn"
+                                (click)="redirectToProdlineModule(prodline.key)">{{ prodline.key}}
+                            </button>
+                        </div> -->
+                </div>
+
+                <ng-template #noProdlines>
+                    <p>No prodlines available.</p>
+                </ng-template>
+
+                <div class="d-flex justify-content-end">
+                    <button mat-raised-button color="warn" class="prod-lines-back-btn"
+                        [routerLink]="['/login']">Back</button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

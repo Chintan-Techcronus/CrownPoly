@@ -1,0 +1,70 @@
+<div class="spinner-container" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="card-header d-flex header-title">
+  <mat-card-title>Incident</mat-card-title>
+</div>
+<hr/>
+<div>
+  <h3 style="text-align: center; font-weight: bold;">Incident Started!</h3>
+  <div>
+    <form [formGroup]="form" (ngSubmit)="onEndClick()">
+      <div>
+        <div style="float: left; width: 50%;  display: flex; gap: 10px; ">Start Time</div>
+        <div style="float: left; width: 50%;  display: flex; gap: 10px; ">End Time</div>
+        <div style="float: left; width: 50%;  display: flex; gap: 5px; ">
+          <div style="display: flex; width: 30%; gap: 5px;">
+            <mat-form-field class="text-muted" style="text-align: center; ">
+              <input matInput style="font-weight: bold;" placeholder="HH" [value]="this.startime.hour"  readonly tabindex="-1">
+            </mat-form-field>
+            <mat-form-field class="text-muted" style="text-align: center;">
+              <input matInput  style="font-weight: bold;" placeholder="MM" [value]="this.startime.minutes" readonly tabindex="-1">
+            </mat-form-field>
+            <mat-form-field class="text-muted" style="text-align: center;">
+              <input matInput style="font-weight: bold;" placeholder="AM/PM" [value]="this.startime.shift" readonly tabindex="-1" >
+            </mat-form-field>
+          </div>
+        </div>
+        <div style="float: left; width: 50%;  display: flex; gap: 5px; ">
+          <div style="display: flex;  width: 30%; gap: 5px;">
+            <mat-form-field class="text-muted" style="text-align: center;">
+              <input matInput style="font-weight: bold;" placeholder="HH" [value]="this.endtime.hour" readonly tabindex="-1">
+            </mat-form-field>
+            <mat-form-field  class="text-muted" style="text-align: center;">
+              <input matInput style="font-weight: bold;" placeholder="MM" [value]="this.endtime.minutes" readonly tabindex="-1">
+            </mat-form-field>
+            <mat-form-field class="text-muted" style="text-align: center;">
+              <input matInput style="font-weight: bold;" placeholder="AM/PM" [value]="this.endtime.shift" readonly tabindex="-1">
+            </mat-form-field>
+          </div>
+        </div>
+        <mat-form-field>
+          <mat-label>Problem Area</mat-label>
+          <mat-select formControlName="selectedProblemarea" required>
+            <mat-option *ngFor="let item of problemarealist" [value]="item.problemArea">{{item.problemArea}}</mat-option>
+          </mat-select>
+          <mat-error>Please select a problem area</mat-error>
+          <mat-hint></mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>What type of Incident?</mat-label>
+          <mat-select formControlName="selectedIncident" (selectionChange)="onSelectedIndex($event)" required>
+            <mat-option *ngFor="let item of incidentlist" [value]="item.incidentCode" >{{item.incidentName}}</mat-option>
+          </mat-select>
+          <mat-error>Please select a incident</mat-error>
+          <mat-hint></mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+          <textarea matInput formControlName="desc" name="description" cols="35" rows="4" placeholder="Description" [value]="this.problemdesc" (input)="onTextareaInput()" >{{this.problemdesc}}</textarea>
+        </mat-form-field>
+        <section class="example-section">
+          <mat-checkbox formControlName="checked" [checked]="false">Line Cleaned?</mat-checkbox>
+        </section>
+        <div fxLayout="row" fxLayoutAlign="start center" style="text-align: end;">
+          <button mat-raised-button type="submit" style="margin-right: 8px" color="primary" [disabled]="!form.valid">End Incident</button>
+          <button mat-raised-button type="button" color="warn" (click)="onCancelClick()"> Cancel </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

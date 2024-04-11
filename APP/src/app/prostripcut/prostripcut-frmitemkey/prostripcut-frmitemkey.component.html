@@ -1,0 +1,19 @@
+<div class="spinner-container" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="card-header d-flex header-title">
+  <mat-card-title>Item Number</mat-card-title>
+</div>
+<hr/>
+<form [formGroup]="itemkeyForm" (ngSubmit)="onSubmitClick()">
+  <mat-form-field class="full-width">
+    <mat-label>Please enter Item Number</mat-label>
+    <input matInput type="text" formControlName="itemno" name="itemno" class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f.itemno.errors}" />
+    <mat-error [ngClass]="{ 'is-invalid': submitted && f.itemno.errors}">There is no Itemkey specified</mat-error>
+  </mat-form-field>&nbsp;&nbsp;
+  <div fxLayout="row" fxLayoutAlign="start center" style="text-align: end;">
+    <button mat-raised-button type="submit" color="primary" style="margin-right: 8px" > Submit </button>
+    <button mat-raised-button type="button" color="warn" (click)="onCancelClick()"> Cancel </button>
+  </div>
+</form>

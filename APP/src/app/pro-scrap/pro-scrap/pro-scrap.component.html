@@ -1,0 +1,118 @@
+<div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
+<div fxLayout="row">
+    <div fxFlex.gt-sm="100%">
+        <mat-card>
+            <mat-card-content>
+                <div class="card-header d-flex header-title">
+                    <mat-card-title>Scrap</mat-card-title>
+                    <span class="text-muted">Scrap Entry</span>
+                </div>
+                <hr />
+                <form [formGroup]="proScrapForm" (ngSubmit)="onSubmit()">
+                    <mat-grid-list cols="4" rowHeight="100px">
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-select (selectionChange)="bindLines()" [(ngModel)]="selectedDep" formControlName="departments" class="mat-select-panel-wrap"
+                                    placeholder="Select Department" required>
+                                    <mat-option *ngFor="let dep of departmentData" [value]="dep.no">
+                                        {{dep.no}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error
+                                    *ngIf="proScrapForm.get('departments')?.hasError('required') && (proScrapForm.get('departments')?.dirty || proScrapForm.get('departments')?.pristine)">
+                                    Department is required
+                                </mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-select formControlName="lineId" class="mat-select-panel-wrap"
+                                    placeholder="Select Line" required>
+                                    <mat-option *ngFor="let line of linesData" [value]="line.no">
+                                        {{line.no}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error
+                                    *ngIf="proScrapForm.get('lineId')?.hasError('required') && (proScrapForm.get('lineId')?.dirty || proScrapForm.get('lineId')?.pristine)">
+                                    Line is required
+                                </mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-select formControlName="ItemKey" class="mat-select-panel-wrap"
+                                    placeholder="Select Scrap Key" required>
+                                    <mat-option *ngFor="let scrapKey of scrapKeyData" [value]="scrapKey.no_">
+                                        {{scrapKey.no_}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error
+                                    *ngIf="proScrapForm.get('ItemKey')?.hasError('required') && (proScrapForm.get('ItemKey')?.dirty || proScrapForm.get('ItemKey')?.pristine)">
+                                    Scrap Key is required
+                                </mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-select [(ngModel)]="selectedContainerValue" (selectionChange)="setContainerName($event)" formControlName="container" class="mat-select-panel-wrap"
+                                    placeholder="Select Container" required>
+                                    <mat-option *ngFor="let container of containerData" [value]="container.weight">
+                                        {{container.typeDesc}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error
+                                    *ngIf="proScrapForm.get('container')?.hasError('required') && (proScrapForm.get('container')?.dirty || proScrapForm.get('container')?.pristine)">
+                                    Container is required
+                                </mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <input matInput type="number" formControlName="grossWeight" placeholder="Gross Weight" min="0">
+                                <mat-error>
+                                    <span  *ngIf="proScrapForm.get('grossWeight')?.hasError('required') && (proScrapForm.get('grossWeight')?.dirty || proScrapForm.get('grossWeight')?.pristine)">
+                                    Gross Weight is required</span>
+                                    <span *ngIf="proScrapForm.get('grossWeight')?.hasError('min')">Please enter a valid quantity.</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <input matInput type="number" formControlName="prevWeight" placeholder="Prev. Weight" min="0">
+                                <mat-error>
+                                  <span  *ngIf="proScrapForm.get('prevWeight')?.hasError('required') && (proScrapForm.get('prevWeight')?.dirty || proScrapForm.get('prevWeight')?.pristine)">
+                                    Prev. Weight is required </span>
+                                    <span *ngIf="proScrapForm.get('prevWeight')?.hasError('min')">Please enter a valid quantity.</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <input matInput formControlName="comments" placeholder="Comments">
+                                <mat-error
+                                    *ngIf="proScrapForm.get('comments')?.hasError('required') && (proScrapForm.get('comments')?.dirty || proScrapForm.get('comments')?.pristine)">
+                                    Comments are required
+                                </mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <div fxLayout="row" fxLayoutAlign="end center">
+                        <button mat-raised-button color="primary" type="submit" [disabled]="!proScrapForm.valid">Record Scrap</button>&nbsp;
+                        <button mat-raised-button color="warn" type="button"
+                            (click)="RefreshControls()">Reload</button>&nbsp;
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+        <div #content class="content">
+            <div style="margin-left:35px;">
+                <qrcode [qrdata]="qr_value" [allowEmptyString]="true"></qrcode>
+            </div>
+            <div style="margin-left:100px;">
+                {{this.ItemKey}}
+            </div>
+        </div>
+    </div>
+</div>

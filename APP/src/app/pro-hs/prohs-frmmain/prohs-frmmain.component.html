@@ -1,0 +1,70 @@
+<div class="spinner-container" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+<mat-card  (onload)="mainFormLoad()">
+  <mat-card-content>
+    <div class="card-header d-flex header-title">
+      <mat-card-title>HippoSak</mat-card-title>
+      <span class="text-muted">Production Entry</span>
+    </div>
+    <hr />&nbsp;
+    <mat-card-title  style="text-align: center; font-size: x-large;">WorkOrder : {{prohsrequest.prodNum}}</mat-card-title>
+    <mat-card-title  style="text-align: center; font-size: x-large;">Item : {{prohsrequest.itemNo}}</mat-card-title>
+    <mat-grid-list cols="3" rowHeight="3:1" style="height: auto; width: auto;">
+      <mat-grid-tile> <mat-card class="proHS-card">
+          <div>
+            <button mat-raised-button color="primary" (click)="onFinishedCase(casedata)" type="button"
+              [disabled]="btnDisabled"
+              [ngStyle]="{'background-color': (btnDisabled)? 'gray': '','opacity': btnDisabled ? 0.5 : 1}">Finished
+              Case</button>
+          </div>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-card class="ChangeWorkOrder-card">
+          <div>
+            <button mat-raised-button type="button" (click)="onChangeWorkOrder(casedata)">Change Work Order</button>
+          </div>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-card class="Consumeroll-card">
+          <div>
+            <button mat-raised-button (click)="onConsumeRolls()" type="button" [disabled]="btnDisabled"
+              [ngStyle]="{'background-color': (btnDisabled)? 'gray': '','opacity': btnDisabled ? 0.5 : 1}">Consume
+              Rolls</button>
+          </div>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="3" [rowspan]="1">
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <table style="border-collapse: collapse; width: 70%; border: 1px solid #ddd;">
+          <tr>
+            <td class="Counts" style="border: 4px solid #ddd; padding: 10px;">Cases</td>
+          </tr>
+          <tr>
+            <td class="red-text" style="border: 4px solid #ddd; padding: 10px; color: red;">{{ count.casesProduced}}</td>
+          </tr>
+        </table>
+      </mat-grid-tile>
+      
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <table style="border-collapse: collapse; width: 70%; border: 1px solid #ddd;">
+          <tr>
+            <td class="Counts" style="border: 3px solid #ddd; padding: 8px ">Case on This Pallet</td>
+            <td class="red-text" style="border: 3px solid #ddd; padding: 8px 50px;; color: red;">{{count.casesOnPallet}}</td>
+          </tr>
+          <tr>
+            <td class="Counts"  style="border: 3px solid #ddd; padding: 8px ">Cases Finished on Work Order</td>
+            <td class="red-text" style="border: 3px solid #ddd; padding: 8px 50px;; color: red;">{{workordercount?.finished || 0}}</td>
+          </tr>
+          <tr>
+            <td class="Counts"  style="border: 3px solid #ddd; padding: 8px ">Cases Remaining on Work Order</td>
+            <td class="red-text" style="border: 3px solid #ddd; padding: 8px 50px;; color: red;">{{workordercount?.remainig || 0}}</td>
+          </tr>
+        </table>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>

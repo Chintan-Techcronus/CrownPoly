@@ -1,0 +1,32 @@
+<div class="bg-white">
+    <img src="assets/images/cp-logo1.png" width="150" alt="user" class="m-5 p-0">
+</div>
+<div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
+<div class="login-container">
+    <mat-card class="login-card">
+        <mat-card-header>
+            <mat-card-title style="font-family: Arial, Helvetica, sans-serif">CROWN POLY</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="loginForm" (ngSubmit)="login()" (keydown.enter)="login()">
+                <mat-form-field class="full-width">
+                    <input matInput type="text"
+                        onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+                        min="0" required formControlName="pin" name="pin" minlength="4" maxlength="4"
+                        placeholder="Please enter pin"
+                        [ngClass]="{ 'is-invalid': submitted && loginForm.get('pin')?.invalid}" required />
+                    <mat-error>
+                        <span
+                            *ngIf="loginForm.get('pin')?.hasError('minlength') || loginForm.get('pin')?.hasError('maxlength')">
+                            Please enter a 4-digit number
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" class="full-width" type="submit" [disabled]="!loginForm.valid">Login</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,106 @@
+.small-button {
+  font-size: 12px; 
+  padding: 20px 50px; 
+  background-color: rgb(137, 137, 138);
+  margin-bottom: 50px;
+  align-items: center;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: #fff;
+  font-size: 20px;
+}
+.proPNP-card button {
+  width: 100%;
+  margin-top: 20px;
+  background-color: rgb(127, 199, 223);
+  color: #fff;
+  padding: 37px 62px;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  line-height: 0.5; 
+}
+.ChangeWorkOrder-card button {
+  width: 100%;
+  margin-top: 20px;
+  background-color: 	#FFBF00;
+  color: #fff;
+  padding: 37px 62px; 
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  line-height: 0.5; 
+}
+.Incident-card button {
+  width: 100%;
+  margin-top: 20px;
+  background-color: #D22B2B;
+  color: #fff;
+  padding: 37px 62px;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  line-height: 0.5;
+}
+.label-tile {
+  font-family: 'Microsoft Sans Serif', sans-serif;
+  font-weight: bold;
+  font-size: 36px;
+  text-align: center;
+}
+.counts-card {
+  display: flex;
+   text-align:center ;
+}
+.Counts {
+  font-family: 'Microsoft Sans Serif', sans-serif;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-right: 20px;
+  padding: 10px;
+  text-align: center;
+}
+.red-text{
+  font-family: 'Microsoft Sans Serif', sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  color: red;
+}
+table {
+  border-collapse: collapse;
+}
+tr {
+  border-bottom: 1pt solid black;
+}
+.btnDisabled {
+  width: 100%;
+  margin-top: 20px;
+  background-color: rgb(104, 100, 101);
+  color: #fff;
+  padding: 37px 62px; 
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  line-height: 0.5; 
+}
+.header-title {
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 23px;
+}
+.mat-card-title {
+  font-size: 25px;
+}
+
+

@@ -1,0 +1,66 @@
+<div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
+<div fxLayout="row">
+    <div fxFlex.gt-sm="100%">
+        <mat-card>
+            <mat-card-content>
+                <div class="card-header">
+                    <mat-card-title>{{title}}</mat-card-title>
+                </div>
+                <hr />
+                <form [formGroup]="caseForm" (ngSubmit)="submitForm()">
+                    <mat-grid-list cols="4">
+                        <mat-form-field>
+                            <input matInput  [matDatepicker]="picker" placeholder="Date" (click)="picker.open()" formControlName="prodDate" required>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error
+                                *ngIf="caseForm.get('prodDate')?.hasError('required') && (caseForm.get('prodDate')?.dirty || caseForm.get('prodDate')?.pristine)">
+                                Date is required
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-select placeholder="Shift" formControlName="shift" required>
+                                <mat-option value="AM">AM</mat-option>
+                                <mat-option value="PM">PM</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="caseForm.get('shift')?.hasError('required')">
+                                Shift is required
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-select placeholder="Line" formControlName="lineNo" required
+                                (selectionChange)="onLineChange($event)">
+                                <mat-option *ngFor="let lineItem of lineNo" [value]="lineItem.no">{{ lineItem.no
+                                    }}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="caseForm.get('lineNo')?.hasError('required')">
+                                Line is required
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-select placeholder="Order" formControlName="prodNum" required>
+                                <mat-option *ngFor="let orderItem of orderOptions" [value]="orderItem.order">{{ orderItem.order
+                                    }}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="caseForm.get('prodNum')?.hasError('required')">
+                                Order is required
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput type="number" placeholder="Quantity" formControlName="quantity" min="1"  (keypress)="onKeyPress($event)" required>
+                            <mat-error *ngIf="caseForm.get('quantity')?.hasError('required')">
+                                Quantity is required
+                            </mat-error>
+                        </mat-form-field>
+                    </mat-grid-list>
+                    <div fxLayout="row" fxLayoutAlign="end center">
+                        <button mat-raised-button color="primary" [disabled]="!caseForm.valid">Submit</button>&nbsp;
+                        <button mat-raised-button color="warn" type="button" [routerLink]="['/users']">Cancel</button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

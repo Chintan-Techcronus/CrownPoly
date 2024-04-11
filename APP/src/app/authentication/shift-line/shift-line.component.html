@@ -1,0 +1,50 @@
+<div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
+<h2 mat-dialog-title>{{title}}</h2>
+<form [formGroup]="shiftLineForm">
+    <mat-dialog-content class="mat-typography">
+        <mat-form-field *ngIf="isProScrap">
+            <mat-select formControlName="lineId" class="mat-select-panel-wrap" placeholder="Select Line" required>
+                <mat-option *ngFor="let line of lineData" [value]="line">
+                    {{line.no}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="shiftLineForm.get('lineId')?.hasError('required') && (shiftLineForm.get('lineId')?.dirty || shiftLineForm.get('lineId')?.pristine)">
+                Line is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Shift" formControlName="shift" required>
+                <mat-option value="AM">AM</mat-option>
+                <mat-option value="PM">PM</mat-option>
+            </mat-select>
+            <mat-error *ngIf="shiftLineForm.get('shift')?.hasError('required')">
+                Shift is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Date" (click)="picker.open()"
+                formControlName="shiftDate" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <button mat-icon-button matSuffix (click)="decreaseDate()">
+                <mat-icon>remove</mat-icon>
+            </button>
+            <button mat-icon-button matSuffix (click)="increaseDate()">
+                <mat-icon>add</mat-icon>
+            </button>
+            <mat-error
+                *ngIf="shiftLineForm.get('shiftDate')?.hasError('required') && (shiftLineForm.get('shiftDate')?.dirty || shiftLineForm.get('shiftDate')?.pristine)">
+                Date is required
+            </mat-error>
+        </mat-form-field>
+        
+    </mat-dialog-content>
+    <br>
+    <mat-dialog-actions align="end">
+        <button mat-raised-button mat-dialog-close color="warn">Close</button>
+        <button mat-raised-button color="primary" [disabled]="!shiftLineForm.valid" (click)="onSubmit()">Login</button>
+    </mat-dialog-actions>
+</form>

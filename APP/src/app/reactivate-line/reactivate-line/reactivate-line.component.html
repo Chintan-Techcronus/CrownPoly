@@ -1,0 +1,40 @@
+<div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
+<div fxLayout="row">
+    <div fxFlex.gt-sm="100%">
+        <mat-card>
+            <mat-card-content>
+                <div class="card-header d-flex header-title">
+                    <mat-card-title>ReActivate Line</mat-card-title>
+                </div>
+                <hr />
+                <div class="col">
+                </div>
+                <form [formGroup]="reactivateLineForm" (ngSubmit)="onSubmit()">
+                    <mat-grid-list cols="4" rowHeight="100px">
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-select formControlName="lineId" class="mat-select-panel-wrap" (selectionChange)="getSystemId($event)"
+                                    placeholder="Select Line" required>
+                                    <mat-option *ngFor="let line of linesData" [value]="line.lineId" [attr.data-systemid]="line.systemid">
+                                        {{line.lineId}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error
+                                    *ngIf="reactivateLineForm.get('lineId')?.hasError('required') && (reactivateLineForm.get('lineId')?.dirty || reactivateLineForm.get('lineId')?.pristine)">
+                                    Line is required
+                                </mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <div fxLayout="row" fxLayoutAlign="end center">
+                        <button mat-raised-button color="primary" type="submit" [disabled]="!reactivateLineForm.valid">ReActivate</button>&nbsp;
+                        <button mat-raised-button color="warn" type="button"
+                            (click)="RefreshLines()">Reload</button>&nbsp;
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

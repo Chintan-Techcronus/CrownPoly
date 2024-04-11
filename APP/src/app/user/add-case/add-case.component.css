@@ -1,0 +1,44 @@
+button {
+  /* padding: 20px; */
+  font-size: 18px;
+}
+
+.mat-card-title {
+  font-size: 25px;
+}
+
+mat-card {
+  height: auto; 
+  overflow-y: auto; 
+}
+
+.card-header {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+mat-select {
+  width: 100%;
+}
+
+mat-datepicker-toggle {
+  cursor: pointer;
+}
+
+input.mat-input,
+mat-select {
+  width: 100%;
+}
+
+input[type="number"] {
+  width: 100%;
+}
+
+.d-flex {
+  float: right;
+}

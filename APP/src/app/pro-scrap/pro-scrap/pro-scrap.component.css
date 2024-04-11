@@ -1,0 +1,21 @@
+button {
+    /* padding: 20px; */
+    font-size: 18px;
+}
+
+.header-title {
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 23px;
+}
+
+.content {
+    position: absolute;
+    top: 30px;
+    z-index: -1 !important;
+    color: black;
+}
+
+.mat-card-title {
+    font-size: 25px;
+}

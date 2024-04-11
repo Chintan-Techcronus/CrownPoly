@@ -1,0 +1,48 @@
+/* login.component.css */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 95vh;
+    background: linear-gradient(to right, #8993eb, #8bc0e9);
+}
+
+.login-card {
+    width: 300px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.login-card mat-card-header {
+    background-color: #4d62cc;
+    color: #fff;
+}
+
+.login-card mat-card-title {
+    font-size: 24px;
+}
+
+.login-card mat-form-field {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.login-card button {
+    width: 100%;
+    margin-top: 20px;
+    background-color: #3f51b5;
+    color: #fff;
+    padding: 16px 20px; /* Adjust the padding as needed */
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    line-height: 0.5; /* Adjust the line-height to increase the height */
+}
+
+.login-card button:hover {
+    background-color: #2196f3;
+}

@@ -1,0 +1,62 @@
+<div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
+<div fxLayout="row">
+    <div fxFlex.gt-sm="100%">
+        <mat-card>
+            <mat-card-content>
+                <div class="card-header d-flex header-title">
+                    <mat-card-title>Repro</mat-card-title>
+                    <span class="text-muted">Production Entry</span>
+                </div>
+                <hr />
+                <div class="col">
+                </div>
+                <form [formGroup]="proReproForm" (ngSubmit)="onSubmit()">
+                    <mat-grid-list cols="4" rowHeight="100px">
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-select formControlName="workOrders" (selectionChange)="getItemKey()"
+                                    class="mat-select-panel-wrap" placeholder="Select Work Order" [multiple]="false"
+                                    required>
+                                    <mat-option *ngFor="let workOrder of workOrdersData" [value]="workOrder.prodNum">
+                                        {{workOrder.prodNum}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error
+                                    *ngIf="proReproForm.get('workOrders')?.hasError('required') && (proReproForm.get('workOrders')?.dirty || proReproForm.get('workOrders')?.pristine)">
+                                    Work Order is required
+                                </mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <input matInput type="number" formControlName="qty" placeholder="Quantity" min="0">
+                                <mat-error>
+                                    <span
+                                    *ngIf="proReproForm.get('qty')?.hasError('required') && (proReproForm.get('qty')?.dirty || proReproForm.get('qty')?.pristine)">
+                                    Quantity is required</span>
+                                    <span *ngIf="proReproForm.get('qty')?.hasError('min')">Please enter a valid quantity.</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <div fxLayout="row" fxLayoutAlign="end center">
+                        <button mat-raised-button color="primary" type="submit" [disabled]="!proReproForm.valid">Record
+                            Production</button>&nbsp;
+                        <button mat-raised-button color="warn" type="button"
+                            (click)="RefreshWorkOrders()">Reload</button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+        <div #content class="content">
+            <div style="margin-left:35px;">
+                <qrcode [qrdata]="qr_value" [allowEmptyString]="true"></qrcode>
+            </div>
+            <div style="margin-left:100px;">
+                {{itemKey}}
+            </div>
+        </div>
+    </div>
+</div>

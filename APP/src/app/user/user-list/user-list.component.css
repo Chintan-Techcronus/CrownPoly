@@ -1,0 +1,84 @@
+/* user-list.component.css */
+.mat-card {
+    margin: 0px;
+    margin-top: -10px;
+}
+
+.card-header {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 2;
+}
+
+.mat-card-title {
+    font-size: 24px;
+}
+
+.mat-card-subtitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.mat-form-field {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.table-container {
+    max-height: 300px; /* Adjust the height as needed */
+    overflow-y: auto;
+}
+
+.mat-table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.text-white{
+    color: white !important;
+}
+.mat-header-row {
+    position: sticky;
+    top: 120px; /* Adjust the top position as needed */
+    background-color: #0066b3;
+    z-index: 1;
+}
+
+.mat-header-cell {
+    font-weight: bold;
+    color: white;
+    font-size: 14px;
+}
+
+.mat-row {
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.mat-row:hover {
+    background-color: #cbe7fc;
+}
+
+.mat-mini-fab {
+    margin: 0 5px;
+}
+
+.mat-paginator {
+    justify-content: center;
+    margin-top: 20px;
+}
+
+  .hide-column {
+    display: none;
+  }
+
+.word-wrap {
+    word-wrap: break-word;
+    white-space: normal; /* Ensure that the content wraps within the cell */
+}
+.column-spacing {
+    width: 70px; /* Adjust the value as needed */
+}

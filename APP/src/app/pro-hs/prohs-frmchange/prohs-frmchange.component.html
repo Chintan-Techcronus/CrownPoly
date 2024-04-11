@@ -1,0 +1,24 @@
+<div class="card-header d-flex header-title">
+  <mat-card-title>Production Order</mat-card-title>
+</div>
+<div class="spinner-container" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+<hr/>
+<div (onload)="formLoad()">
+  <h4>Please select a work order</h4>
+  <form [formGroup]="form">
+    <mat-form-field>
+      <mat-label>Select a work order</mat-label>
+      <mat-select formControlName="selectedWorkOrder" required>
+        <mat-option *ngFor="let item of prodnamelist" [value]="item.prodNum">{{ item.prodNum }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('selectedWorkOrder')?.invalid">Please select a Production Number</mat-error>
+      <mat-hint></mat-hint>
+    </mat-form-field>&nbsp;&nbsp;
+    <div fxLayout="row" fxLayoutAlign="start center" style="text-align: end;">
+      <button mat-raised-button type="button" style="margin-right: 8px" color="primary" (click)="onEnterClick()"> Enter </button>
+      <button mat-raised-button type="button" color="warn" (click)="onCancelClick()"> Cancel </button>
+    </div>
+  </form>
+</div>

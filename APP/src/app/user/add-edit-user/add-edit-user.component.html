@@ -1,0 +1,64 @@
+<div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
+<div fxLayout="row">
+    <div fxFlex.gt-sm="100%">
+        <mat-card>
+            <mat-card-content>
+                <div class="card-header">
+                    <mat-card-title>{{title}}</mat-card-title>
+                </div>
+                <hr />
+                <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                    <mat-grid-list cols="4">
+                        <mat-form-field>
+                            <input matInput formControlName="firstName" placeholder="First Name">
+                            <mat-error
+                                *ngIf="userForm.get('firstName')?.hasError('required') && (userForm.get('firstName')?.dirty || userForm.get('firstName')?.pristine)">
+                                First Name is required</mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput formControlName="lastName" placeholder="Last Name">
+                            <mat-error
+                                *ngIf="userForm.get('lastName')?.hasError('required') && (userForm.get('lastName')?.dirty || userForm.get('lastName')?.pristine)">
+                                Last Name is required</mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-select #prodLinesSelect formControlName="prodLines" class="mat-select-panel-wrap"
+                                placeholder="Select Prod Lines" multiple required (focus)="prodLinesSelect.open()" >
+                                <mat-form-field> <input matInput (input)="filterText = $event.target.value"
+                                        placeholder="Search"></mat-form-field>
+                                <mat-option *ngFor="let pl of prodLineData | filterOptions: filterText"
+                                [disabled]="!IsSuper && pl.id === 10"  [value]="pl.id">{{ pl.name }}</mat-option>
+                            </mat-select>
+                            <mat-error
+                                *ngIf="userForm.get('prodLines')?.hasError('required') && (userForm.get('prodLines')?.dirty || userForm.get('prodLines')?.pristine)">
+                                Prod Lines are required
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput type="text" min="0" formControlName="pin" placeholder="Pin" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"   minlength="4" maxlength="4"
+                                (blur)="checkPinExist(userForm.get('pin')?.value)">
+                            <mat-error
+                                *ngIf="userForm.get('pin')?.hasError('required') && (userForm.get('pin')?.dirty || userForm.get('pin')?.pristine)">Pin
+                                is required</mat-error>
+                            <mat-error
+                                *ngIf="userForm.get('pin')?.hasError('pattern') && (userForm.get('pin')?.dirty || userForm.get('pin')?.pristine)">Invalid
+                                Pin format. Please enter a 4-digit number.</mat-error>
+                        </mat-form-field>
+                        <mat-checkbox formControlName="roleId">Super</mat-checkbox>
+                        &nbsp;
+                        <mat-checkbox formControlName="isActive" *ngIf="isEditMode">Active</mat-checkbox>
+                    </mat-grid-list>
+                    <div fxLayout="row" fxLayoutAlign="end center">
+                        <button mat-raised-button color="primary" type="submit" *ngIf="!isEditMode"
+                            [disabled]="!userForm.valid">Save</button>&nbsp;
+                        <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid"
+                            *ngIf="isEditMode">Update</button>&nbsp;
+                            <button mat-raised-button color="warn" [routerLink]="['/users']">Cancel</button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

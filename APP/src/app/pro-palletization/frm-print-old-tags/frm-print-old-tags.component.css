@@ -1,0 +1,55 @@
+/* Add space between table columns */
+th.mat-header-cell,
+td.mat-cell {
+  padding: 3px; /* Adjust the padding value as needed */
+  text-align: center;
+}
+
+.mat-table {
+  width: 100%;
+  table-layout: fixed;
+}
+.table-container {
+  max-height: 500px; /* Adjust the height as needed */
+  overflow-y: auto;
+}
+.text-white{
+  color: white !important;
+}
+.mat-header-row {
+  position: sticky;
+  top: -1px; /* Adjust the top position as needed */
+  background-color: #0066b3;
+  z-index: 1;
+}
+
+.mat-header-cell {
+  font-weight: bold;
+  color: white;
+  font-size: 15px;
+  padding: 0px;
+  padding-top:20px ;
+}
+
+.mat-paginator {
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.hide-column {
+  display: none;
+}
+
+.column-spacing {
+  width: 70px; /* Adjust the value as needed */
+}
+.content{
+  position: absolute;
+  top: 80px;
+  z-index: -1 !important;
+  color: black;
+  opacity: .1;
+}
+.mat-card {
+  box-shadow: none;
+}

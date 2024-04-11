@@ -1,0 +1,14 @@
+button{
+    /* padding: 20px; */
+    font-size: 18px;
+}
+
+.header-title{
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 23px;
+}
+
+.mat-card-title {
+    font-size: 25px;
+}

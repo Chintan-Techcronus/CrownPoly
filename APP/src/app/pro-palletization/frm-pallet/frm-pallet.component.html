@@ -1,0 +1,74 @@
+<div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
+<h2 mat-dialog-title>Create Production Tag</h2>
+<form [formGroup]="proFrmPalletForm">
+    <mat-dialog-content class="mat-typography">
+        <mat-form-field>
+            <mat-select formControlName="lineId" (selectionChange)="getItem()" [(ngModel)]="selectedLine"
+                class="mat-select-panel-wrap" placeholder="Select Line" required>
+                <mat-option *ngFor="let line of lineData" [value]="line.no">
+                    {{line.no}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="proFrmPalletForm.get('lineId')?.hasError('required') && (proFrmPalletForm.get('lineId')?.dirty || proFrmPalletForm.get('lineId')?.pristine)">
+                Line is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select formControlName="itemKey" (selectionChange)="getPalletSize()" [(ngModel)]="selectedItem"
+                class="mat-select-panel-wrap" placeholder="Select Item" required>
+                <mat-option *ngFor="let item of itemData" [value]="item.itemNumber">
+                    {{item.itemNumber}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="proFrmPalletForm.get('itemKey')?.hasError('required') && (proFrmPalletForm.get('itemKey')?.dirty || proFrmPalletForm.get('itemKey')?.pristine)">
+                Item is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="number" formControlName="qty" placeholder="Quantity">
+            <mat-error
+                *ngIf="proFrmPalletForm.get('qty')?.hasError('required') && (proFrmPalletForm.get('qty')?.dirty || proFrmPalletForm.get('qty')?.pristine)">
+                Quantity is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="number" formControlName="weight" placeholder="Weight">
+            <mat-error
+                *ngIf="proFrmPalletForm.get('weight')?.hasError('required') && (proFrmPalletForm.get('weight')?.dirty || proFrmPalletForm.get('weight')?.pristine)">
+                Weight is required
+            </mat-error>
+        </mat-form-field>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+        <button mat-raised-button mat-dialog-close color="warn">Close</button>
+        <button mat-raised-button color="primary" [disabled]="!proFrmPalletForm.valid" (click)="onSubmit()">Create Production Tag</button>
+    </mat-dialog-actions>
+</form>
+
+<ng-template #dialogRef let-data>
+
+    <h1 mat-dialog-title>Quantity Alert</h1>
+    <div mat-dialog-content>
+        The Quantity differs from the Standard Pallet. Continue?
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button mat-dialog-close [mat-dialog-close]="false">No</button>
+        <button mat-button mat-dialog-close cdkFocusInitial color="warn" [mat-dialog-close]="true">Yes</button>
+    </div>
+</ng-template>
+
+<div #content class="content">
+    <div style="margin-left:35px;">
+        <qrcode [qrdata]="qr_value" [width]="30" [allowEmptyString]="true"></qrcode>
+    </div>
+    <div style="margin-left:40px; font-size: 6px;">
+        <div>Item No: {{itemNumber}}</div>
+        <div>Date: {{currentDate | date: "yyyy-MM&nbsp;-dd"}}</div>
+        <div>Unique No.: {{uniqueNo}}</div>
+    </div>
+</div>

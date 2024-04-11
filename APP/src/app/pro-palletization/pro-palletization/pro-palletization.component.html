@@ -1,0 +1,42 @@
+<div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
+        <mat-card>
+            <mat-card-content>
+                <div class="card-header d-flex header-title">
+                    <mat-card-title>Palletization</mat-card-title>
+                    <span class="text-muted">Production</span>
+                </div>
+                <hr />
+                <form>
+                    <mat-grid-list cols="2" rowHeight="3:1">
+                        <mat-grid-tile>
+                            <button mat-raised-button class="btn-yellow" (click)="createProductionTag()">
+                                  Create production tag   
+                            </button>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <button mat-raised-button color="primary" class="btn-green" (click)="moveCaseToAnotherLine()">
+                                Move a case to another line
+                            </button>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <button mat-raised-button color="primary" class="btn-cyan" (click)="getCurrentCasesUntagged()">
+                                Current cases to <br> untagged production
+                            </button>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <button mat-raised-button color="primary" class="btn-pink" (click)="rePrintLastProdTag()">
+                                Reprint last production tag
+                            </button>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <button mat-raised-button color="primary" class="btn-coralpink" (click)="printOldLotTag()">
+                                Print old lot tags
+                            </button>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                </form>
+            </mat-card-content>
+        </mat-card>
+   

@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~ngx-toastr/toastr.css';
+
+
+/*Below is for spinner*/
+.spinner-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  /* Ensure it appears on top of other elements */
+}
+
+.mat-drawer {
+  background-color: #0066b3 !important;
+
+}
+
+#snav .mat-list-item .mat-list-item-content>a {
+  color: white !important;
+}
+
+.swal2-title {
+  color: black !important;
+  font-size: 20px !important;
+  font-weight: normal !important;
+  font-family: Poppins, sans-serif !important;
+}
+
+/* .swal-button {
+  padding: 7px 19px;
+  border-radius: 2px;
+  background-color: red !important;
+  font-size: 12px;
+  color: green !important;
+  border: 1px solid #3e549a;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+} */

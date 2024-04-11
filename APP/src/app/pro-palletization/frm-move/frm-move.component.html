@@ -1,0 +1,66 @@
+<div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
+<h2 mat-dialog-title>Move Cases</h2>
+<form [formGroup]="proFrmMoveForm">
+    <mat-dialog-content class="mat-typography">
+        <mat-form-field>
+            <mat-select formControlName="lineId" (selectionChange)="getItem()" [(ngModel)]="selectedLine"
+                class="mat-select-panel-wrap" placeholder="Select Line" required>
+                <mat-option *ngFor="let line of lineData" [value]="line.no">
+                    {{line.no}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="proFrmMoveForm.get('lineId')?.hasError('required') && (proFrmMoveForm.get('lineId')?.dirty || proFrmMoveForm.get('lineId')?.pristine)">
+                Line is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select formControlName="itemKey" (selectionChange)="getPalletSize()" [(ngModel)]="selectedItem"
+                class="mat-select-panel-wrap" placeholder="Select Item" required>
+                <mat-option *ngFor="let item of itemData" [value]="item.itemNumber">
+                    {{item.itemNumber}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="proFrmMoveForm.get('itemKey')?.hasError('required') && (proFrmMoveForm.get('itemKey')?.dirty || proFrmMoveForm.get('itemKey')?.pristine)">
+                Item is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="number" formControlName="qty" placeholder="Quantity">
+            <mat-error
+                *ngIf="proFrmMoveForm.get('qty')?.hasError('required') && (proFrmMoveForm.get('qty')?.dirty || proFrmMoveForm.get('qty')?.pristine)">
+                Quantity is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select formControlName="newLineId"
+                class="mat-select-panel-wrap" placeholder="Select New Line" required>
+                <mat-option *ngFor="let line of lineData" [value]="line.no">
+                    {{line.no}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="proFrmMoveForm.get('lineId')?.hasError('required') && (proFrmMoveForm.get('lineId')?.dirty || proFrmMoveForm.get('lineId')?.pristine)">
+                New Line is required
+            </mat-error>
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-raised-button mat-dialog-close color="warn">Close</button>
+        <button mat-raised-button color="primary" [disabled]="!proFrmMoveForm.valid" (click)="onSubmit()">Move Case</button>
+    </mat-dialog-actions>
+</form>
+
+<ng-template #dialogRef let-data>
+    <h1 mat-dialog-title>Alert</h1>
+    <div mat-dialog-content>
+        Are you sure you want to make this move?
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button mat-dialog-close [mat-dialog-close]="false">No</button>
+        <button mat-button mat-dialog-close cdkFocusInitial color="warn" [mat-dialog-close]="true">Yes</button>
+    </div>
+</ng-template>

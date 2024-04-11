@@ -1,0 +1,30 @@
+<div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
+<h2 mat-dialog-title>Last Production Tag</h2>
+<form [formGroup]="proFrmReprintForm">
+    <mat-dialog-content class="mat-typography">
+        <mat-form-field>
+            <input matInput type="number" formControlName="weight" placeholder="Weight">
+            <mat-error
+                *ngIf="proFrmReprintForm.get('weight')?.hasError('required') && (proFrmReprintForm.get('weight')?.dirty || proFrmReprintForm.get('weight')?.pristine)">
+                Weight is required
+            </mat-error>
+        </mat-form-field>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+        <button mat-raised-button mat-dialog-close color="warn" (click)="onCancel()" >Close</button>
+        <button mat-raised-button color="primary" [disabled]="!proFrmReprintForm.valid" (click)="onSubmit()">Print Last Production Tag</button>
+    </mat-dialog-actions>
+</form>
+<div #content class="content">
+    <div style="margin-left:35px;">
+        <qrcode [qrdata]="qr_value" [width]="30" [allowEmptyString]="true"></qrcode>
+    </div>
+    <div style="margin-left:40px; font-size: 6px;">
+        <div>Item No: {{itemNumber}}</div>
+        <div>Date: {{currentDate | date: "yyyy-MM&nbsp;-dd"}}</div>
+        <div>Unique No.: {{uniqueNo}}</div>
+    </div>
+</div>
